@@ -1,41 +1,42 @@
 #include <stdio.h>
 #include <string.h>
-#include<ctype.h>
+#include <ctype.h>
 
-
-int cnt[1000];
-char a[1000][100];
-
-int main() {
-    char c[1000 * 100]; 
-    fgets(c, sizeof(c), stdin);
-    for(int i = 0; c[i]; i++) { 
+void lower(char c[]) {
+    for (int i = 0; i < strlen(c); i++) {
         c[i] = tolower(c[i]);
     }
+} 
 
-    char *token = strtok(c, " \n"); 
+int main()
+{
+    char c[10000];
+    gets(c);
+    lower(c);
     int n = 0;
-
-    while (token != NULL) {
-        int check = 0;
-        for (int i = 0; i < n; i++) {
-            if (strcmp(a[i], token) == 0) {
-                cnt[i]++;
-                check = 1;
-                break;
+    char a[1000][100];
+    char *token = strtok(c, " ");
+    while(token != NULL)
+    {
+        strcpy(a[n++], token);
+        token = strtok(NULL, " ");
+    }
+    int b[10000];
+    for(int i = 0; i < n; i++)
+    {
+        int cnt = 1;
+        if(b[i] == 0)
+        {
+            for(int j = i + 1; j < n; j++)
+            {
+                if(strcmp(a[i], a[j]) == 0)
+                {
+                    b[j] = 1;
+                    cnt++;
+                }
             }
+            printf("%s %d\n", a[i], cnt);
         }
-        if (!check) {
-            strcpy(a[n], token);
-            cnt[n]++;
-            n++;
-        }
-        token = strtok(NULL, " \n");
     }
-
-    for (int i = 0; i < n; i++) {
-        printf("%s %d\n", a[i], cnt[i]);
-    }
-    
-    return 0;
 }
+
