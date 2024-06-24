@@ -2,8 +2,10 @@
 #include <string.h>
 #include <ctype.h>
 
-void lower(char c[]) {
-    for (int i = 0; i < strlen(c); i++) {
+void lower(char c[]) 
+{
+    for (int i = 0; i < strlen(c); i++) 
+    {
         c[i] = tolower(c[i]);
     }
 } 
